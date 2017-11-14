@@ -50,10 +50,12 @@ class TasklistsController extends Controller
     {
         
         $this->validate($request,[
+            'status'=>'required|Max:255',
             'content'=>'required|Max:255',
         ]);
         
         $tasklist = new Tasklist;
+        $tasklist->status = $request->status;
         $tasklist->content = $request->content;
         $tasklist->save();
         
@@ -101,10 +103,12 @@ class TasklistsController extends Controller
     {
         
         $this->validate($request,[
+            'status' => 'required|Max:255',
             'content' => 'required|Max:255',
         ]);
         
         $tasklist = Tasklist::find($id);
+        $tasklist->status = $request->status;
         $tasklist->content = $request->content;
         $tasklist->save();
         

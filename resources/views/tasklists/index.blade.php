@@ -8,7 +8,7 @@
     @if (count($tasklists) > 0) <!-- レコード群の数が0より大きい -->
         <ul>
             @foreach($tasklists as $tasklist)<!-- 1つずつレコードを処理 -->
-                <li>{!! link_to_route('tasklists.show', $tasklist->id, ['id' => $tasklist->id]) !!} : {{ $tasklist->content }}</li><!-- レコードのcontentカラムを取得 -->
+                <li>{!! link_to_route('tasklists.show', $tasklist->id, ['id' => $tasklist->id]) !!} : {{$tasklist->status}} < {{ $tasklist->content }}</li><!-- レコードのcontentカラムを取得 -->
             @endforeach
         </ul>
     @endif
