@@ -20,7 +20,7 @@ Route::get('/','TasklistsController@index');
 
 /*
 //1.先にCRUDメソッドを書いてしまう
-Route::get('tasklists/{id}','TasklistsController@show');
+Route::get('tasklists/{id}','TasklistsController@show');tasklists→tasks〇
 Route::post('tasklists','TasklistsController@store');
 Route::put('tasklists/{id}','TasklistsController@update');
 Route::delete('tasklist/{id}','TasklistsController@delete');
