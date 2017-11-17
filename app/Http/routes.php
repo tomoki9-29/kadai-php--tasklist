@@ -11,12 +11,12 @@
 |
 */
 
-/*Route::get('/', function () {
+Route::get('/', function () {
     return view('welcome');
-});*/
+});
 
-//↑上記を下記のように書き換える
-Route::get('/','TasklistsController@index');
+/*//↑上記を下記のように書き換える
+Route::get('/','TasklistsController@index');*/
 
 /*
 //1.先にCRUDメソッドを書いてしまう
