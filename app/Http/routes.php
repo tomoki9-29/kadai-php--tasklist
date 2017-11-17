@@ -41,4 +41,8 @@ Route::get('tasklists/{id}/edit','TasklistsController@edit');
 */
 
 //↑これらの7つのルーティングは以下のルーティングと同じ意味になる
-Route::resource('tasklists','TasklistsController');
+//Route::resource('tasklists','TasklistsController');
+
+Route::group(['middleware' => 'auth'], function () {
+    Route::resource('users', 'UsersController', ['only' => ['index', 'show']]);
+});
