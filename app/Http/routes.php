@@ -15,6 +15,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+// ユーザ登録
+Route::get('signup', 'Auth\AuthController@getRegister')->name('signup.get');
+Route::post('signup', 'Auth\AuthController@postRegister')->name('signup.post');
+
 /*//↑上記を下記のように書き換える
 Route::get('/','TasklistsController@index');*/
 
