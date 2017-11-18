@@ -112,6 +112,7 @@ class TasklistsController extends Controller
         return view('tasklists.edit',[
             'tasklist' => $tasklist,
         ]);
+        
     }
 
     /**
@@ -145,9 +146,17 @@ class TasklistsController extends Controller
      */
     public function destroy($id)
     {
-        $tasklist = Tasklist::find($id);
+        /*$tasklist = Tasklist::find($id);
         $tasklist->delete();
         
-        return redirect('/');
+        return redirect('/');*/
+        
+        $tasklist = \App\Tasklist::find($id);
+
+        if (\Auth::user()->id === $tasklist->user_id) {
+            $tasklist->delete();
+        }
+
+        return redirect()->back();
     }
 }
