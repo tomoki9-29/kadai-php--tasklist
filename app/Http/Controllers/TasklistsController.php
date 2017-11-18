@@ -19,11 +19,26 @@ class TasklistsController extends Controller
      */
     public function index()
     {
-        $tasklists = Tasklist::all();
+        /*if (\Auth::check()) {
+          $user = \Auth::user();
+          $tasklists = $user->tasklists;
+        }
         
         return view('tasklists.index',[
-            'tasklists' => $tasklists,
-        ]);
+          'tasklists' => $tasklists,
+        ]);*/
+        
+        $data = [];
+        if (\Auth::check()) {
+            $user = \Auth::user();
+            $tasklists = $user->tasklists()->orderBy('created_at', 'desc')->paginate(10);
+
+            $data = [
+                'user' => $user,
+                'tasklists' => $tasklists,
+            ];
+        }
+        return view('tasklists.index', $data);
     }
 
     /**
@@ -54,11 +69,18 @@ class TasklistsController extends Controller
             'content'=>'required|Max:255',
         ]);
         
-        $tasklist = new Tasklist;
+        /*$tasklist = new Tasklist;
         $tasklist->status = $request->status;
         $tasklist->content = $request->content;
         $tasklist->save();
         
+        return redirect('/');*/
+        
+        $request->user()->tasklists()->create([
+            'content' => $request->content,
+            'status' => $request->status,
+        ]);
+    
         return redirect('/');
     }
 

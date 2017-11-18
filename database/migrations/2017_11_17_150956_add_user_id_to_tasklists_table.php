@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddStatusToTasklistsTable extends Migration
+class AddUserIdToTasklistsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,10 @@ class AddStatusToTasklistsTable extends Migration
     public function up()
     {
         Schema::table('tasklists', function (Blueprint $table) {
-            $table->string('status');
+            $table->integer('user_id')->unsigned()->index();
+        
+            // 外部キー制約
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 
@@ -25,7 +28,7 @@ class AddStatusToTasklistsTable extends Migration
     public function down()
     {
         Schema::table('tasklists', function (Blueprint $table) {
-            $table->dropColumn('status');
+            $table->dropColumn('user_id');
         });
     }
 }

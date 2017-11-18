@@ -11,9 +11,11 @@
 |
 */
 
-Route::get('/', function () {
+/*Route::get('/', function () {
     return view('welcome');
-});
+});*/
+
+Route::get('/', 'TasklistsController@index');
 
 // ユーザ登録
 Route::get('signup', 'Auth\AuthController@getRegister')->name('signup.get');
@@ -24,8 +26,8 @@ Route::get('login', 'Auth\AuthController@getLogin')->name('login.get');
 Route::post('login', 'Auth\AuthController@postLogin')->name('login.post');
 Route::get('logout', 'Auth\AuthController@getLogout')->name('logout.get');
 
-/*//↑上記を下記のように書き換える
-Route::get('/','TasklistsController@index');*/
+//↑上記を下記のように書き換える
+//Route::get('/','TasklistsController@index');
 
 /*
 //1.先にCRUDメソッドを書いてしまう
@@ -43,6 +45,9 @@ Route::get('tasklists/{id}/edit','TasklistsController@edit');
 //↑これらの7つのルーティングは以下のルーティングと同じ意味になる
 //Route::resource('tasklists','TasklistsController');
 
+
+//['middleware' => 'auth'] を加えることで、このグループに書かれたルーティングは必ずログイン認証を確認させます。
 Route::group(['middleware' => 'auth'], function () {
     Route::resource('users', 'UsersController', ['only' => ['index', 'show']]);
+    Route::resource('tasklists', 'TasklistsController');
 });

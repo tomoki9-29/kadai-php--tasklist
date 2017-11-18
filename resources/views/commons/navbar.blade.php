@@ -17,7 +17,6 @@
                 <ul class="nav navbar-nav navbar-right">
                     <!--黒い帯の右上に新規タスクの投稿（リンク先create.blade.php）を追加--> 
                     @if (Auth::check())
-                        <li>{!! link_to_route('users.index', 'Users') !!}</li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ Auth::user()->name }} <span class="caret"></span></a>
                             <ul class="dropdown-menu">
