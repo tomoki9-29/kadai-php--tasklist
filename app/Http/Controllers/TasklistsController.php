@@ -117,7 +117,12 @@ class TasklistsController extends Controller
      */
     public function edit($id)
     {
-        $tasklist = Tasklist::find($id);
+        //$tasklist = Tasklist::find($id);
+        
+        if (\Auth::check()) {
+            $user = \Auth::user();
+            $tasklist = $user->tasklists->find($id);
+        }
         
         return view('tasklists.edit',[
             'tasklist' => $tasklist,
