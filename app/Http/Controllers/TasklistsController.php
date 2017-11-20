@@ -92,20 +92,21 @@ class TasklistsController extends Controller
      */
     public function show($id)
     {
-        $tasklist = Tasklist::find($id);
+        /*$tasklist = Tasklist::find($id);
         
         return view('tasklists.show',[
             'tasklist' => $tasklist,
-        ]);
+        ]);*/
         
-        /*if (\Auth::check()) {
+        if (\Auth::check()) {
             $user = \Auth::user();
             $tasklists = $user->tasklists->find($id);
         }
         
         return view('tasklists.show',[
-            'tasklist' => $tasklist,
-        ]);*/
+            'tasklists' => $tasklists,
+        ]);
+        
     }
 
     /**
@@ -116,20 +117,12 @@ class TasklistsController extends Controller
      */
     public function edit($id)
     {
-        //$tasklist = Tasklist::find($id);
+        $tasklist = Tasklist::find($id);
         
-        /*return view('tasklists.edit',[
+        return view('tasklists.edit',[
             'tasklist' => $tasklist,
-        ]);*/
+        ]);
         
-        if (\Auth::user()->id === $tasklist->user_id) {
-            $tasklist = Tasklist::find($id);
-
-            return view('tasklists.edit',[
-                'tasklist' => $tasklist,
-            ]);
-        }
-
         return redirect()->back();
         
     }
@@ -149,19 +142,19 @@ class TasklistsController extends Controller
             'content' => 'required|Max:255',
         ]);
         
-        /*$tasklist = Tasklist::find($id);
+        $tasklist = Tasklist::find($id);
         $tasklist->status = $request->status;
         $tasklist->content = $request->content;
         $tasklist->save();
         
-        return redirect('/');*/
+        return redirect('/');
         
-        $request->user()->tasklists()->edit([
+        /*$request->user()->tasklists()->edit([
             'content' => $request->content,
             'status' => $request->status,
         ]);
     
-        return redirect('/');
+        return redirect('/');*/
     }
 
     /**
