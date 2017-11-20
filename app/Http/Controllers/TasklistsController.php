@@ -92,19 +92,20 @@ class TasklistsController extends Controller
      */
     public function show($id)
     {
-        /*$tasklist = Tasklist::find($id);
+        $tasklist = Tasklist::find($id);
+        
+        return view('tasklists.show',[
+            'tasklist' => $tasklist,
+        ]);
+        
+        /*if (\Auth::check()) {
+            $user = \Auth::user();
+            $tasklists = $user->tasklists->find($id);
+        }
         
         return view('tasklists.show',[
             'tasklist' => $tasklist,
         ]);*/
-        
-        if (\Auth::check()) {
-            $user = \Auth::user();
-            $tasklists = $user->tasklists->find($id);
-        }
-        return view('tasklists.show',[
-            'tasklist' => $tasklist,
-        ]);
     }
 
     /**
