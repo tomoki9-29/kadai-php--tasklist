@@ -98,14 +98,23 @@ class TasklistsController extends Controller
             'tasklist' => $tasklist,
         ]);*/
         
-        if (\Auth::check()) {
+        /*if (\Auth::check()) {
             $user = \Auth::user();
             $tasklists = $user->tasklists->find($id);
         }
         
         return view('tasklists.show',[
             'tasklists' => $tasklists,
-        ]);
+        ]);*/
+        
+        $tasklist = Tasklist::find($id);
+
+        if (\Auth::user()->id === $tasklist->user_id) {
+            return view('tasklists.show',[
+            'tasklist' => $tasklist,
+            ]);
+        }
+        else{return redirect('/');}
         
     }
 
@@ -119,7 +128,7 @@ class TasklistsController extends Controller
     {
         //$tasklist = Tasklist::find($id);
         
-        if (\Auth::check()) {
+        /*if (\Auth::check()) {
             $user = \Auth::user();
             $tasklist = $user->tasklists->find($id);
         }
@@ -128,7 +137,16 @@ class TasklistsController extends Controller
             'tasklist' => $tasklist,
         ]);
         
-        return redirect()->back();
+        return redirect()->back();*/
+        
+        $tasklist = Tasklist::find($id);
+
+        if (\Auth::user()->id === $tasklist->user_id) {
+            return view('tasklists.edit',[
+            'tasklist' => $tasklist,
+            ]);
+        }
+        else{return redirect('/');}
         
     }
 
